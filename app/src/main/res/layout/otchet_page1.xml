@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1f102b"
+    android:orientation="vertical">
+
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/Shapka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Отчёты"
+        android:textColor="#e8ddc1"
+        android:textSize="35sp" />
+
+    <ImageButton
+        android:id="@+id/ChangePeriodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:srcCompat="@drawable/add_othcet"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"/>
+
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/Shapka"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Dopi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#1f102b"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.775"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="1"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteY="101dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/VnutriScrolla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/SelectedDatas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textColor="@color/bezhev"
+                android:textSize="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:layout_marginHorizontal="40dp"
+                android:text="Выберите диапазон дат в правом верхнем углу"/>
+
+            <TableLayout
+                android:visibility="gone"
+                android:id="@+id/firstTable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/SelectedDatas">
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Количество смен/часов"
+                        android:textSize="20dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="3dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:layout_span="2"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple">
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/DataText"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple" />
+                    <TextView
+                        android:id="@+id/KolSmens"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Количество смен/часов:"
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                    <TextView
+                        android:id="@+id/AllSmens"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="number"
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:visibility="gone"
+                android:id="@+id/secondTable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/firstTable">
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Количество чаевых/сверхурочных"
+                        android:textSize="20dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="3dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:layout_span="2"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple">
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/DataText2"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple" />
+                    <TextView
+                        android:id="@+id/KolChai"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Сумма:\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                    <TextView
+                        android:id="@+id/AllChai"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="number"
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:visibility="gone"
+                android:id="@+id/thirdTable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/secondTable">
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Сумма вознаграждения"
+                        android:textSize="20dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="3dp"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:layout_span="2"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple">
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/DataText3"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple" />
+                    <TextView
+                        android:id="@+id/KolZP"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+                <TableRow android:background="@color/lightpurple"
+                    android:layout_marginVertical="3dp">
+                    <TextView
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Сумма:\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                        android:textSize="17dp"
+                        android:layout_marginVertical="2dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                    <TextView
+                        android:id="@+id/AllZP"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="number"
+                        android:textAlignment="textEnd"
+                        android:layout_marginVertical="2dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/white"
+                        android:background="@color/lightpurple"/>
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/GenerateBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сгенерировать"
+                android:textSize="12dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/thirdTable"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

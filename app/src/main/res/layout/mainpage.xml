@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1f102b"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/dop_show_hide"
+        layout="@layout/dop_page"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/shab_show_hide"
+        layout="@layout/shablon_page"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/otch_show_hide"
+        layout="@layout/otchet_page1"
+        android:visibility="gone"/>
+    <include
+        android:id="@+id/cal_show_hide"
+        layout="@layout/calendar_page"
+        android:visibility="visible"/>
+
+    <ImageButton
+        android:id="@+id/CalButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00AAA28D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/OtchetButton"
+        app:srcCompat="@drawable/cal_but_state" />
+
+    <ImageButton
+        android:id="@+id/OtchetButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/CalButton"
+        app:layout_constraintRight_toLeftOf="@id/ShablonButton"
+        app:srcCompat="@drawable/otch_but_state" />
+
+    <ImageButton
+        android:id="@+id/ShablonButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/OtchetButton"
+        app:layout_constraintRight_toRightOf="@id/DopButton"
+        app:srcCompat="@drawable/shab_but_state" />
+
+    <ImageButton
+        android:id="@+id/DopButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ShablonButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/dop_but_state" />
+</androidx.constraintlayout.widget.ConstraintLayout>

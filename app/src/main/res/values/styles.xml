@@ -1,0 +1,9 @@
+<resources>
+
+
+    <style name="CalendarColor" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+</resources>

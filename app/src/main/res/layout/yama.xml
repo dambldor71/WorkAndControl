@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1F102B">
+
+
+    <ImageButton
+        android:id="@+id/CalButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00AAA28D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/OtchetButton"
+        app:srcCompat="@drawable/cal" />
+
+    <ImageButton
+        android:id="@+id/OtchetButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/CalButton"
+        app:layout_constraintRight_toLeftOf="@id/ShablonButton"
+        app:srcCompat="@drawable/otchet" />
+
+    <ImageButton
+        android:id="@+id/ShablonButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/OtchetButton"
+        app:layout_constraintRight_toRightOf="@id/DopButton"
+        app:srcCompat="@drawable/shablon" />
+
+    <ImageButton
+        android:id="@+id/DopButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ShablonButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/dop" />
+</androidx.constraintlayout.widget.ConstraintLayout>
