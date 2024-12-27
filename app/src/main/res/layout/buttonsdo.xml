@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F102B"
+    android:background="@color/creamwhite"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +15,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="Что вы хотите сделать с шаблоном смены?"
         android:textAlignment="center"
-        android:textColor="#e8ddc1"
+        android:textColor="@color/darkblue"
         android:textSize="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -28,7 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="40dp"
+        android:background="@color/darkblue"
         android:text="Удалить смену"
+        android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ZagDialBut" />
@@ -39,7 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="5dp"
+        android:background="@color/darkblue"
         android:text="Редактировать смену"
+        android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/DeleteButSm" />
@@ -58,12 +61,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="5dp"
-        android:text="Назад"
         android:layout_marginBottom="50dp"
+        android:background="@color/darkblue"
+        android:text="Назад"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

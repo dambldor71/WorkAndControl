@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#1f102b"
+    android:background="@color/creamwhite"
     android:orientation="vertical">
 
     <ScrollView
@@ -14,7 +14,7 @@
         android:id="@+id/Dopi"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#1f102b"
+        android:background="@color/creamwhite"
         tools:context=".MainActivity"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintHeight_default="percent"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Work&amp;Control:"
-                android:textColor="#e8ddc1"
+                android:textColor="@color/darkblue"
                 android:textSize="23dp" />
 
             <Button
@@ -52,7 +52,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:text="О разработчике" />
+                android:background="@color/darkblue"
+                android:text="О разработчике"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/zagolovok2"
@@ -62,7 +64,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Календарь:"
-                android:textColor="#e8ddc1"
+                android:textColor="@color/darkblue"
                 android:textSize="23dp" />
 
             <Button
@@ -71,7 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:text="Праздники" />
+                android:background="@color/darkblue"
+                android:text="Праздники"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/FormClockBut"
@@ -79,7 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:text="Формат времени" />
+                android:background="@color/darkblue"
+                android:text="Формат времени"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/zagolovok3"
@@ -89,7 +95,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Поддержка:"
-                android:textColor="#e8ddc1"
+                android:textColor="@color/darkblue"
                 android:textSize="23dp" />
 
             <Button
@@ -98,7 +104,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:text="Политика конфидециальности" />
+                android:background="@color/darkblue"
+                android:text="Политика конфидециальности"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/MassageBut"
@@ -106,7 +114,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:text="Сообщение в поддержку" />
+                android:background="@color/darkblue"
+                android:text="Сообщение в поддержку"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/ObApps"
@@ -116,7 +126,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Дата: 2024"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/darkblue"
                 android:textSize="16dp" />
 
             <TextView
@@ -126,7 +136,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="РГППУ"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/darkblue"
                 android:textSize="16dp" />
 
             <TextView
@@ -136,7 +146,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Екатеринбург"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/darkblue"
                 android:textSize="16dp" />
 
             <TextView
@@ -146,7 +156,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Машиностроителей, 11"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/darkblue"
                 android:textSize="16dp" />
 
             <TextView
@@ -154,9 +164,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-medium"
-                android:text="Руководитель: Толстова Наталья Сергеевна"
+                android:text="Руководитель: Макеева Мария Александровна"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/darkblue"
                 android:textSize="16dp" />
         </LinearLayout>
     </ScrollView>

@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#888</color>
+    <color name="lightblue">#828FC1</color>
     <!-- 231, 220, 192 -->
-    <color name="bezhev">#e8ddc1</color>
-    <color name="lightpurple">#42354c</color>
+    <color name="darkblue">#41475D</color>
+    <color name="creamwhite">#E6E6E6</color>
 </resources>

@@ -8,7 +8,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
 
     // БАЗА ДАННЫХ
-    public static final String DATABASE_NAME = "TestDrive15";
+    public static final String DATABASE_NAME = "TestDrive16";
 
     // ТАБЛИЦЫ
     public static final String TABLE_OTCHET = "TestOtchet";

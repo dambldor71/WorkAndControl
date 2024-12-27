@@ -1,7 +1,6 @@
 package Package.WC;
 
 
-
 import static Package.WC.DBHelper.WORK_CHAI;
 import static Package.WC.DBHelper.WORK_DATA;
 import static Package.WC.DBHelper.WORK_ID;
@@ -14,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,13 +29,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements  CalendarAdapter.OnItemListener {
+public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
     //СОЗДАНИЕ ПЕРЕМЕННЫХ
     ImageButton CalendarBut;
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
     ImageButton DopolnBut;
     ImageButton PlusSmBut;
     ImageButton ChangePeriodBut;
+    Button DumpToGoogleBut;
     ImageButton AddOtchetBut;
 
     Button prevMonthBut, nextMonthBut;
@@ -102,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
         CalendarBut = (ImageButton) findViewById(R.id.CalButton);
         OtchetBut = (ImageButton) findViewById(R.id.OtchetButton);
         ShablonBut = (ImageButton) findViewById(R.id.ShablonButton);
-        DopolnBut= (ImageButton) findViewById(R.id.DopButton);
+        DopolnBut = (ImageButton) findViewById(R.id.DopButton);
         cal = (ConstraintLayout) findViewById(R.id.cal_show_hide);
         otch = (ConstraintLayout) findViewById(R.id.otch_show_hide);
         sha = (ConstraintLayout) findViewById(R.id.shab_show_hide);
@@ -116,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
 
         PlusSmBut = (ImageButton) findViewById(R.id.ShabAddBut);
         ChangePeriodBut = (ImageButton) findViewById(R.id.ChangePeriodButton);
+        DumpToGoogleBut = (Button) findViewById(R.id.DumpToGoogleBut);
 
         CheckWorkDaysBut = (Button) findViewById(R.id.razrabBut);
         ScrollSShab = (LinearLayout) findViewById(R.id.VnutriScrolla);
@@ -162,14 +171,14 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
         String endDate = "";
 
         Bundle arguments = getIntent().getExtras();
-        if(arguments!=null) {
+        if (arguments != null) {
             startDate = String.valueOf(arguments.get("firstDate"));
             endDate = String.valueOf(arguments.get("secondDate"));
             if (startDate.equals("null") && endDate.equals("null")) {
                 SelectedDatas.setText("Выберите диапазон дат в правом верхнем углу");
             } else {
-                String showDate1 = startDate.split("-")[2] +"."+ startDate.split("-")[1] + "." + startDate.split("-")[0];
-                String showDate2 = endDate.split("-")[2] +"."+ endDate.split("-")[1] + "." + endDate.split("-")[0];
+                String showDate1 = startDate.split("-")[2] + "." + startDate.split("-")[1] + "." + startDate.split("-")[0];
+                String showDate2 = endDate.split("-")[2] + "." + endDate.split("-")[1] + "." + endDate.split("-")[0];
                 SelectedDatas.setText("Отчёт с " + showDate1 + " по " + showDate2);
             }
         }
@@ -214,8 +223,8 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
             public void onClick(View v) {
                 if (finalStartDate1.isEmpty() && finalEndDate1.isEmpty()) {
                     Toast dati = Toast.makeText(MainActivity.this, "Укажите даты", Toast.LENGTH_SHORT);
-                    dati.show(); }
-                else {
+                    dati.show();
+                } else {
                     table1.setVisibility(View.VISIBLE);
                     table2.setVisibility(View.VISIBLE);
                     table3.setVisibility(View.VISIBLE);
@@ -227,11 +236,12 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                     int sum = 0;
                     int zp = 0;
                     String selection = "Data_work_day >= ? and Data_work_day <= ?";
-                    String[] selectionArgs = new String[] {finalStartDate, finalEndDate};
+                    String[] selectionArgs = new String[]{finalStartDate, finalEndDate};
                     Cursor cct = databaseMain.query(DBHelper.WORK_DAYS, null, selection, selectionArgs, null, null, "Data_work_day");
                     DataText.setText("");
                     DataText2.setText("");
                     DataText3.setText("");
+
                     if (cct.moveToFirst()) {
                         int indexDate = cct.getColumnIndex(DBHelper.WORK_DATA);
                         int indexId = cct.getColumnIndex(DBHelper.WORK_ID);
@@ -239,7 +249,6 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                         int indexTime = cct.getColumnIndex(DBHelper.WORK_TIME);
                         int indexSum = cct.getColumnIndex(DBHelper.WORK_ZP);
                         int indexZagl = cct.getColumnIndex(DBHelper.WORK_ZAGL);
-
                         do {
                             DataText.append(cct.getString(indexDate) + " " + cct.getString(indexZagl) + "\n");
                             DataText2.append(cct.getString(indexDate) + "\n");
@@ -261,7 +270,61 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                 }
             }
         });
+        DumpToGoogleBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (finalStartDate1.isEmpty() && finalEndDate1.isEmpty()) {
+                    Toast dati = Toast.makeText(MainActivity.this, "Укажите даты", Toast.LENGTH_SHORT);
+                    dati.show();
+                } else {
+                    saveData(
+                            "Наименование смены",
+                            "Дата смены",
+                            "Часы за смену",
+                            "Выплата за смену",
+                            "Сверхурочные за смену"
+                    );
+                    int sumSmen = 0;
+                    float sumHours = 0;
+                    int sumZp = 0;
+                    int sumSverh = 0;
+                    String selection = "Data_work_day >= ? and Data_work_day <= ?";
+                    String[] selectionArgs = new String[]{finalStartDate, finalEndDate};
+                    Cursor cct = databaseMain.query(DBHelper.WORK_DAYS, null, selection, selectionArgs, null, null, "Data_work_day");
+                    if (cct.moveToFirst()) {
+                        int indexDate = cct.getColumnIndex(DBHelper.WORK_DATA);
+                        int indexId = cct.getColumnIndex(DBHelper.WORK_ID);
+                        int indexChai = cct.getColumnIndex(DBHelper.WORK_CHAI);
+                        int indexTime = cct.getColumnIndex(DBHelper.WORK_TIME);
+                        int indexSum = cct.getColumnIndex(DBHelper.WORK_ZP);
+                        int indexZagl = cct.getColumnIndex(DBHelper.WORK_ZAGL);
+                        do {
+                            saveData(
+                                    cct.getString(indexZagl),
+                                    cct.getString(indexDate),
+                                    String.valueOf(cct.getFloat(indexTime)),
+                                    String.valueOf(cct.getInt(indexSum)),
+                                    String.valueOf(cct.getInt(indexChai))
+                            );
+                            sumSmen += 1;
+                            sumHours += cct.getFloat(indexTime);
+                            sumZp += cct.getInt(indexSum);
+                            sumSverh += cct.getInt(indexChai);
+                        } while (cct.moveToNext());
+                    }
+                    saveData(
+                            "Количество смен: " + sumSmen,
+                            "",
+                            "Количество часов: " + sumHours,
+                            "Сумма: " + sumZp,
+                            "Сумма: " + sumSverh
+                    );
+                    Toast finish = Toast.makeText(MainActivity.this, "Выгрузка завершена", Toast.LENGTH_SHORT);
+                    finish.show();
+                }
+            }
 
+        });
         PlusSmBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
         String text = "";
         int SchetchikKola = 0;
         Cursor c = databaseMain.query(DBHelper.TABLE_OTCHET, null, null, null, null, null, null);
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             int idIndex = c.getColumnIndex(DBHelper.KEY_ID);
             int zagolovokIndex = c.getColumnIndex(DBHelper.KEY_ZAGOLOVOK);
             int stavkaIndex = c.getColumnIndex(DBHelper.KEY_STAVKA);
@@ -322,9 +385,8 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                     if (smenabuttons[k].getId() == v.getId()) {
                         id = k;
                         break;
-                    }
-                    else {
-                        k+= 1;
+                    } else {
+                        k += 1;
                     }
                 }
                 //Log.d("IDvSpis", String.valueOf(id));
@@ -351,12 +413,12 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                 CustomDialogFragment dialog = new CustomDialogFragment();
                 Bundle args = new Bundle();
                 args.putString("zagol", CheckWorkDaysBut.getText().toString());
-                args.putString("razrab", "Студенты 3 курса РГППУ:\nЧенский Сергей Валерьевич,\nКотенев Владислав Николаевич,\nКлимова Полина Андреевна");
+                args.putString("razrab", "Студент 4 курса РГППУ:\nЧенский Сергей Валерьевич");
                 dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "custom");
 
                 Cursor cursor = databaseMain.query(DBHelper.WORK_DAYS, null, null, null, null, null, null);
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     int idId = cursor.getColumnIndex(WORK_ID);
                     int workdata = cursor.getColumnIndex(WORK_DATA);
                     int worktime = cursor.getColumnIndex(WORK_TIME);
@@ -469,9 +531,10 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
 
     }
 
-    String[] months = new String[] {"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
-    String[] final_months = new String[] {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+    String[] months = new String[]{"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+    String[] final_months = new String[]{"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
             "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView() {
         int dateNum = 0;
@@ -507,19 +570,17 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
 
         Cursor cursor = databaseMain.query(DBHelper.WORK_DAYS, null, null, null, null, null, null);
         String Q = "";
-        for (int  i = 1; i <= 42; i++) {
+        for (int i = 1; i <= 42; i++) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add("");
-            }
-            else {
+            } else {
                 if (String.valueOf(i - dayOfWeek).length() == 1) {
                     Q = "0" + (i - dayOfWeek);
-                }
-                else {
+                } else {
                     Q = String.valueOf(i - dayOfWeek);
                 }
                 ArrayList<String> checkcheck = new ArrayList<String>();
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
 
                     int workdata = cursor.getColumnIndex(WORK_DATA);
 
@@ -532,8 +593,7 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
                 }
                 if (checkcheck.contains(String.valueOf(dst) + Q)) {
                     daysInMonthArray.add(Q + "\n" + "\uD83D\uDCBC");
-                }
-                else {
+                } else {
                     daysInMonthArray.add(Q);
                 }
                 //Log.d("CHECK2", String.valueOf(dst) + Q);
@@ -559,26 +619,23 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
     public void onItemClick(int position, String dayText) {
         String selectedMonth = monthYearFromDate(selectedDate).split(" ")[0];
         int i = 0;
-        while (i < 12){
+        while (i < 12) {
             if (months[i].equals(selectedMonth)) {
                 break;
-            }
-            else {
+            } else {
                 i += 1;
             }
         }
         String month = "";
         if (String.valueOf(i + 1).length() < 2) {
             month += "0" + (i + 1);
-        }
-        else {
+        } else {
             month = String.valueOf(i + 1);
         }
         String date = "";
         if (dayText.length() < 2) {
             date += "0" + dayText;
-        }
-        else {
+        } else {
             date = dayText;
         }
         GlobalDate = monthYearFromDate(selectedDate).split(" ")[1] + "-" + month + "-" + date.substring(0, 2);
@@ -587,5 +644,26 @@ public class MainActivity extends AppCompatActivity implements  CalendarAdapter.
         toast.show();
         AddOnBut.setVisibility(View.VISIBLE);
         ShowWorkDays.setVisibility(View.VISIBLE);
+    }
+    
+    private void saveData(String zagl, String data, String time, String zp, String dopzp)
+    {
+        String url = "https://script.google.com/macros/s/AKfycbxb4-cR7xYlpGUGNvIb8Gdjo_Wa5v1fChkUTzj3Rk5_2DDxKs369pmTZ9p-q9VpEdw0/exec?";
+        url = url + "action=create&zagl=" + zagl + "&data="+ data + "&time=" + time + "&zp=" + zp + "&dopzp=" + dopzp;
+
+        SystemClock.sleep(1500);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "ОШИБКА", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue queue= Volley.newRequestQueue(this);
+        queue.add(stringRequest);
     }
 }

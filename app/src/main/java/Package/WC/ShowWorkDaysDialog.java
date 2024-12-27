@@ -1,19 +1,14 @@
 package Package.WC;
 
-import static Package.WC.DBHelper.WORK_CHAI;
-import static Package.WC.DBHelper.WORK_DATA;
 import static Package.WC.DBHelper.WORK_ID;
 import static Package.WC.DBHelper.WORK_TIME;
 import static Package.WC.DBHelper.WORK_ZAGL;
 import static Package.WC.DBHelper.WORK_ZP;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,9 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 
 

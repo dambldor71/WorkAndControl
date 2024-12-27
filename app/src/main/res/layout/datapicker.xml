@@ -9,7 +9,7 @@
         android:id="@+id/datePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E7DCC0"
+        android:background="@color/lightblue"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         android:dayOfWeekBackground="#00FFFFFF"
